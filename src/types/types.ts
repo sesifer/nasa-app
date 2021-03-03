@@ -28,3 +28,8 @@ export type GalleryItem = {
     rover: Rover,
     sol: number,
 }
+
+export type RoverBaseDetail = {
+    id: number,
+    name: string,
+}

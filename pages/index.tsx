@@ -1,62 +1,39 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.scss";
-import Link from "next/link";
-import Image from "next/image";
+import Content from "../src/components/Content";
 import { Box, Grid, Typography } from "@material-ui/core";
 import React from "react";
+import Header from "../src/components/Header";
+import { ROVERS } from "../src/types/constants";
 
 export default function Home() {
-    const rovers = ["perseverance", "curiosity", "opportunity", "spirit"];
-
     return (
         <>
             <Head>
                 <title>Next App Example - NASA</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Grid container>
-                <Box p={5}>
-                    <Typography
-                        variant={"h1"}
-                        align={"center"}
-                        color={"primary"}
-                        gutterBottom
-                    >
-                    Meanwhile, on the Red planet..
-                    </Typography>
-                    <Typography
-                        variant={"h3"}
-                        align={"center"}
-                        color={"secondary"}
-                        gutterBottom={true}
-                    >
-                    Explore Mars by the eye of a NASA rover
-                    </Typography>
-                </Box>
-                <div className={styles.wrapper}>
-                    <ul className={styles.grid}>
-                        {rovers.map(rover => {
-
-                            return (
-                                <li key={rover} className={styles.card}>
-                                    <Link href='/rovers/[id]' as={`/rovers/${rover}`}>
-                                        <a>
-                                            <Image
-                                                src={`/images/rovers/${rover}.jpg`}
-                                                layout="responsive"
-                                                width={500}
-                                                height={500}
-                                                alt={`Mars rover ${rover}`}
-                                            />
-                                            <h3>{rover.toUpperCase()}</h3>
-                                        </a>
-                                    </Link>
-                                </li>
-                            );
-                        })
-                        }
-                    </ul>
-                </div>
+            <Grid container direction={"column"}>
+                <Grid item>
+                    <Header />
+                </Grid>
+                <Grid item container>
+                    <Grid item xs={1} sm={2} />
+                    <Box p={5}>
+                        <Typography
+                            variant={"h1"}
+                            align={"center"}
+                            color={"primary"}
+                            gutterBottom={true}
+                        >
+                    Explore Mars by the eyes of a NASA rover
+                        </Typography>
+                    </Box>
+                    <Grid item xs={10} sm={8}>
+                        <Content rovers={ROVERS}/>
+                    </Grid>
+                    <Grid item xs={1} sm={2} />
+                </Grid>
             </Grid>
 
             <footer className={styles.footer}>
@@ -65,7 +42,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-          Powered by{" "}
+                    Powered by{" "}
                     <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
                 </a>
             </footer>

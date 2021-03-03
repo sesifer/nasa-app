@@ -53,53 +53,51 @@ const ManifestDetail = (props: ManifestProps) => {
     const { landingDate, launchDate, name, status, photosTaken } = props;
 
     return (
-        <div>
-            <Grid>
-                <Card>
-                    <Image
-                        src={`/images/rovers/${name.toLowerCase()}.jpg`}
-                        layout="intrinsic"
-                        width={350}
-                        height={350}
-                        alt={`Mars rover ${name}`}
-                    />
-                </Card>
-                <List>
-                    <ListItem>
+        <Grid>
+            <Card>
+                <Image
+                    src={`/images/rovers/${name.toLowerCase()}.jpg`}
+                    layout="intrinsic"
+                    width={350}
+                    height={350}
+                    alt={`Mars rover ${name}`}
+                />
+            </Card>
+            <List>
+                <ListItem>
                         Name
-                    </ListItem>
-                    <ListItem>
+                </ListItem>
+                <ListItem>
                         Status
-                    </ListItem>
-                    <ListItem>
+                </ListItem>
+                <ListItem>
                         Landing Date
-                    </ListItem>
-                    <ListItem>
+                </ListItem>
+                <ListItem>
                         Launch Date
-                    </ListItem>
-                    <ListItem>
+                </ListItem>
+                <ListItem>
                         Photos taken so far
-                    </ListItem>
-                </List>
-                <List>
-                    <ListItem>
-                        <D>{name}</D>
-                    </ListItem>
-                    <ListItem>
-                        <D>{status}</D>
-                    </ListItem>
-                    <ListItem>
-                        <D>{landingDate}</D>
-                    </ListItem>
-                    <ListItem>
-                        <D>{launchDate}</D>
-                    </ListItem>
-                    <ListItem>
-                        <D>{photosTaken}</D>
-                    </ListItem>
-                </List>
-            </Grid>
-        </div>
+                </ListItem>
+            </List>
+            <List>
+                <ListItem>
+                    <D>{name}</D>
+                </ListItem>
+                <ListItem>
+                    <D>{status}</D>
+                </ListItem>
+                <ListItem>
+                    <D>{landingDate}</D>
+                </ListItem>
+                <ListItem>
+                    <D>{launchDate}</D>
+                </ListItem>
+                <ListItem>
+                    <D>{photosTaken}</D>
+                </ListItem>
+            </List>
+        </Grid>
     );
 };
 

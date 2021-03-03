@@ -1,5 +1,11 @@
 export const DEFAULT_ENDPOINT = "https://api.nasa.gov/mars-photos/api/v1/";
 export const API_KEY = "sk6a2WZ1vspEWxMYFKXmRUUQYIHMqe8GNl8r6f49";
+export const ROVERS = [
+    {id: 1, name: "perseverance"},
+    {id: 2, name: "curiosity"},
+    {id: 3, name: "opportunity"},
+    {id: 4, name: "spirit"}
+];
 export const CAMERAS = [
     {
         key: "FHAZ",

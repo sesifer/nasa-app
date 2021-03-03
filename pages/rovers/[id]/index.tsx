@@ -1,53 +1,15 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import Link from "next/link";
+import React, { ReactElement, useState } from "react";
 import Head from "next/head";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import styles from "./../../../styles/Home.module.scss";
 import styled from "styled-components";
 import ManifestDetail from "../../../src/components/ManifestDetail";
 import { KeyboardDatePicker } from "@material-ui/pickers";
 import { addDays, format } from "date-fns";
 import { PhotoItem } from "../../../src/types/types";
-import { Button, FormControl, InputLabel, MenuItem, Select, Typography } from "@material-ui/core";
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from "@material-ui/core";
 import { API_KEY, DEFAULT_ENDPOINT } from "../../../src/types/constants";
 import GalleryHorizontal from "../../../src/components/Gallery/GalleryHorizontal";
-import useSWR from "swr";
-
-const Container = styled.div`
-    min-height: 10vh;
-    padding: 0 0.5rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`;
-
-const Content = styled.div`
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 2;
-    padding: 30px;
-    text-align: center;
-`;
-
-const Title = styled.h1`
- margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-  text-align: center;
-
-  a {
-    color: $color-primary;
-    text-decoration: none;
-
-    &:hover,
-    &:focus,
-    &:active {
-      text-decoration: underline;
-    }
-  }
-`;
+import Header from "../../../src/components/Header";
 
 const MyFormControl = styled(FormControl)`
     margin: 1.5rem 0,
@@ -111,8 +73,13 @@ export default function Manifest(props: InferGetServerSidePropsType<typeof getSe
                 />
             </Head>
             <main>
-                <Container>
-                    <Content>
+                <Grid container direction={"column"}>
+                    {/*header grid*/}
+                    <Grid item>
+                        <Header />
+                    </Grid>
+                    {/*content grid*/}
+                    <Grid item container direction={"column"}>
                         <Typography
                             variant={"h1"}
                             align={"center"}
@@ -128,54 +95,62 @@ export default function Manifest(props: InferGetServerSidePropsType<typeof getSe
                             photosTaken={total_photos}
                             status={status}
                         />
-                        <KeyboardDatePicker
-                            autoOk
-                            variant="inline"
-                            inputVariant="standard"
-                            id="date-picker"
-                            label="Pick your date:"
-                            format="dd/MM/yyyy"
-                            placeholder="DD/MM/YYYY"
-                            value={selectedDate}
-                            InputAdornmentProps={{ position: "start" }}
-                            onChange={date => setDate(date)}
-                            maxDate={yesterday}
-                            maxDateMessage={`Date should not be after ${formattedYesterday}`}
-                            minDate={minDate}
-                            minDateMessage={`Date should not be before ${minDate}`}
-                        />
-                        <MyFormControl>
-                            <InputLabel
-                                shrink
-                                id="camera-select-label">
-                                Camera
-                            </InputLabel>
-                            <Select
-                                labelId="camera-select-label"
-                                id="camera-select"
-                                defaultValue={""}
-                                value={selectedCamera}
-                                onChange={handleChange}
-                                displayEmpty
-                            >
-                                {cameras.map(camera => {
-                                    return (
-                                        <MenuItem key={camera} value={camera}>{camera}</MenuItem>
-                                    );
-                                })
-                                }
-                            </Select>
-                        </MyFormControl>
-                        <GalleryHorizontal
-                            camera={selectedCamera}
-                            selectedDate={selectedDate}
-                            roverId={id}
-                        />
-                    </Content>
-                    <Button color="primary" variant="outlined" href="/">
-                        Back to All rovers
-                    </Button>
-                </Container>
+                        <Grid item container>
+                            <KeyboardDatePicker
+                                autoOk
+                                variant="inline"
+                                inputVariant="standard"
+                                id="date-picker"
+                                label="Pick your date:"
+                                format="dd/MM/yyyy"
+                                placeholder="DD/MM/YYYY"
+                                value={selectedDate}
+                                InputAdornmentProps={{ position: "start" }}
+                                onChange={date => setDate(date)}
+                                maxDate={yesterday}
+                                maxDateMessage={`Date should not be after ${formattedYesterday}`}
+                                minDate={minDate}
+                                minDateMessage={`Date should not be before ${minDate}`}
+                            />
+                            <MyFormControl>
+                                <InputLabel
+                                    shrink
+                                    id="camera-select-label">
+                                    Camera
+                                </InputLabel>
+                                <Select
+                                    labelId="camera-select-label"
+                                    id="camera-select"
+                                    defaultValue={""}
+                                    value={selectedCamera}
+                                    onChange={handleChange}
+                                    displayEmpty
+                                >
+                                    {cameras.map(camera => {
+                                        return (
+                                            <MenuItem key={`menu-item-${camera}`} value={camera}>
+                                                {camera}
+                                            </MenuItem>
+                                        );
+                                    })
+                                    }
+                                </Select>
+                            </MyFormControl>
+                        </Grid>
+                        <Grid item>
+                            <GalleryHorizontal
+                                camera={selectedCamera}
+                                selectedDate={selectedDate}
+                                roverId={id}
+                            />
+                        </Grid>
+                        <Grid item>
+                            <Button color="primary" variant="outlined" href="/">
+                                    Back to All rovers
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </main>
         </>
     );

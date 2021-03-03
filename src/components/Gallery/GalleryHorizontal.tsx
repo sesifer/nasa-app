@@ -26,15 +26,13 @@ const GalleryHorizontal = (props: GalleryProps) => {
     if (!data) return <h1>Loading...</h1>;
 
     return (
-        <div>
-            <GridList>
-                {data.photos.map((item: GalleryItem) => {
-                    return <GridListTile key={item.id}>
-                        <img src={item.img_src} alt="" />
-                    </GridListTile>;
-                })}
-            </GridList>
-        </div>
+        <GridList>
+            {data.photos.map((item: GalleryItem) => {
+                return <GridListTile key={item.id}>
+                    <img src={item.img_src} alt="" />
+                </GridListTile>;
+            })}
+        </GridList>
     );
 };
 

@@ -7,18 +7,21 @@ import { SWRConfig } from "swr";
 import { ThemeProvider } from "@material-ui/styles";
 import lightTheme from "../src/theme/theme";
 import styles from "./../styles/App.module.scss";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
 function MyApp({ Component, pageProps } : AppProps) {
     const [style, setStyle] = useState<React.CSSProperties>({ visibility: "hidden" });
     useEffect(() => {
         const jssStyles = document.querySelector("#jss-server-side");
-        jssStyles?.parentElement.removeChild(jssStyles);
+        jssStyles?.parentElement?.removeChild(jssStyles);
         setStyle({});
     }, []);
+
     
     return (
         <>
-            <div className={styles["appContainer"]} style={style}>
+            <CssBaseline />
+            <div className={styles["app-container"]} style={style}>
                 <ThemeProvider theme={lightTheme}>
                     <SWRConfig
                         value={{
@@ -26,7 +29,7 @@ function MyApp({ Component, pageProps } : AppProps) {
                         }}
                     >
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <div className={styles["contentContainer"]}>
+                            <div className={styles["content-container"]}>
                                 <Component {...pageProps} />
                             </div>
                         </MuiPickersUtilsProvider>
