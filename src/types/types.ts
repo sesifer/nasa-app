@@ -32,4 +32,5 @@ export type GalleryItem = {
 export type RoverBaseDetail = {
     id: number,
     name: string,
+    description: string,
 }
