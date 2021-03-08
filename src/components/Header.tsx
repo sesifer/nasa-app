@@ -22,7 +22,7 @@ const Header = () => {
     return (
         <AppBar position="static" color="secondary">
             <Toolbar>
-                <Typography className={classes.typographyStyles}>
+                <Typography variant={"caption"} className={classes.typographyStyles}>
                     Meanwhile, on the Red planet..
                 </Typography>
                 <Link href="/">

@@ -22,19 +22,18 @@ function MyApp({ Component, pageProps } : AppProps) {
             <CssBaseline />
             <div className={styles["app-container"]} style={style}>
                 <ThemeProvider>
-                    <Paper>
-                        <SWRConfig
-                            value={{
-                                fetcher: (resource, init) => fetch(resource, init).then(res => res.json())
-                            }}
-                        >
-                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                                <div className={styles["content-container"]}>
-                                    <Component {...pageProps} />
-                                </div>
-                            </MuiPickersUtilsProvider>
-                        </SWRConfig>
-                    </Paper>
+                    <SWRConfig
+                        value={{
+                            fetcher: (resource, init) => fetch(resource, init).then(res => res.json())
+                        }}
+                    >
+                        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                            <div className={styles["content-container"]}>
+                                <Component {...pageProps} />
+                            </div>
+                        </MuiPickersUtilsProvider>
+                    </SWRConfig>
+
                 </ThemeProvider>
             </div>
         </>

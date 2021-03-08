@@ -87,15 +87,27 @@ const RoverCard = ({ rover }: RoverCardProps): JSX.Element => {
                     </>
                 }
             />
-            <Link href={`/rovers/${rover.id}`} as={`/rovers/${rover.name}`}>
-                <CardMedia className={classes.cardMedia}>
-                    <img
-                        src={`/images/rovers/${rover.name}.jpg`}
-                        className={classes.media}
-                        alt={rover.name}
-                    />
-                </CardMedia>
-            </Link>
+            {rover.name === "next"
+                ? <Link href={`/rovers/${rover.id}`} as={`/rovers/${rover.name}`}>
+                    <CardMedia className={classes.cardMedia}>
+                        <img
+                            src={`/images/rovers/${rover.name}.jpg`}
+                            className={classes.media}
+                            alt={rover.name}
+                        />
+                    </CardMedia>
+                </Link>
+                :
+                <Link href={"http://www.mars-one.comddd/"}>
+                    <CardMedia className={classes.cardMedia}>
+                        <img
+                            src={`/images/rovers/${rover.name}.jpg`}
+                            className={classes.media}
+                            alt={rover.name}
+                        />
+                    </CardMedia>
+                </Link>
+            }
             <CardContent className={classes.content}>
                 <CardActions disableSpacing>
                     <Typography
