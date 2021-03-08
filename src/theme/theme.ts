@@ -2,7 +2,7 @@ import {createMuiTheme, Theme, ThemeOptions} from "@material-ui/core/styles";
 
 export const paletteColorsDark = {
     primary: "rgb(234, 103, 73)",
-    secondary: "rgb(79, 156, 251)",
+    secondary: "rgb(66, 81, 100)",
     error: "#ED6560",
     background: "rgb(243, 244, 248)",
     text: "rgb(66, 81, 100)",
