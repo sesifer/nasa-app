@@ -65,5 +65,3 @@ export const CAMERAS = [
         name: "Miniature Thermal Emission Spectrometer"
     }
 ];
-
-export const fetcher = (...args) => fetch(...args).then(res => res.json());

@@ -6,4 +6,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  img {
+    margin-left: 0.5rem;
+  }
+
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: underline;
+    }
+  }
 }
+
+

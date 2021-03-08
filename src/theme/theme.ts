@@ -1,19 +1,19 @@
-import { createMuiTheme, ThemeOptions, responsiveFontSizes } from "@material-ui/core";
+import {createMuiTheme, Theme, ThemeOptions} from "@material-ui/core/styles";
 
 export const paletteColorsDark = {
-    primary: "#0f4c75",
-    secondary: "#3282b8",
-    error: "#E44C65",
-    background: "#1b262c",
-    text: "#bbe1fa",
+    primary: "rgb(234, 103, 73)",
+    secondary: "rgb(79, 156, 251)",
+    error: "#ED6560",
+    background: "rgb(243, 244, 248)",
+    text: "rgb(66, 81, 100)",
 };
 
 export const paletteColorsLight = {
-    primary: "#6886c5",
-    secondary: "#ffe0ac",
-    error: "#E44C65",
-    background: "#f9f9f9",
-    text: "#050505",
+    primary: "rgb(79, 156, 251)",
+    secondary: "rgb(246, 184, 83)",
+    error: "#ED6560",
+    background: "rgb(66, 81, 100)",
+    text: "rgb(255, 255, 255)",
 };
 
 const options = (dark: boolean): ThemeOptions => {
@@ -38,9 +38,15 @@ const options = (dark: boolean): ThemeOptions => {
             },
         },
         typography: {
-            fontFamily: "Lato",
+            fontFamily: [
+                "Press Start 2P",
+                "cursive",
+            ].join(","),
             h1: {
-                fontFamily: "Roboto Slab",
+                fontFamily: [
+                    "Press Start 2P",
+                    "cursive",
+                ].join(","),
                 fontWeight: 300,
                 fontSize: "96px",
                 lineHeight: "127px",
@@ -88,11 +94,18 @@ const options = (dark: boolean): ThemeOptions => {
                     },
                 },
             },
-        },
+            MuiSelect: {
+                select: {
+                    "&:focus": {
+                        backgroundColor: paletteColors.background,
+                    }
+                }
+            }
+        }
     };
 };
 
-export const darkTheme = createMuiTheme(options(true));
-export const lightTheme = createMuiTheme(options(false));
+export const darkTheme: Theme = createMuiTheme(options(true));
+export const lightTheme: Theme = createMuiTheme(options(false));
 
 export default lightTheme;

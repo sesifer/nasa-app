@@ -1,19 +1,9 @@
 import React from "react";
-import {
-    Box,
-    Card,
-    CardContent,
-    CardHeader,
-    CardMedia,
-    IconButton,
-    Collapse,
-    Grid,
-    CardActions
-} from "@material-ui/core";
+import { Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton } from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Share } from "@material-ui/icons";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Link from "next/link";
 import { RoverBaseDetail } from "../types/types";
 import Typography from "@material-ui/core/Typography";
@@ -30,12 +20,15 @@ const useStyles = makeStyles((theme: Theme) =>
                 boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
             }
         },
+        cardMedia: {
+            display: "flex",
+            justifyContent: "center",
+            cursor: "pointer",
+        },
         media: {
-            paddingTop: "56.25%",
-            height: 0,
-            minHeight: 650,
-            maxWidth: 650,
-            //minWidth:550,
+            width: "100%",
+            height: "auto",
+            maxWidth: "100vw",
         },
         content: {
             padding: 20,
@@ -81,7 +74,7 @@ const RoverCard = ({ rover }: RoverCardProps): JSX.Element => {
     };
 
     return (
-        <Card className={classes.card} raised>
+        <Card className={classes.card} raised color={"primary"}>
             <CardHeader
                 action={
                     <>
@@ -95,11 +88,13 @@ const RoverCard = ({ rover }: RoverCardProps): JSX.Element => {
                 }
             />
             <Link href={`/rovers/${rover.id}`} as={`/rovers/${rover.name}`}>
-                <CardMedia
-                    className={classes.media}
-                    image={`/images/rovers/${rover.name}.jpg`}
-                    title={rover.name}
-                />
+                <CardMedia className={classes.cardMedia}>
+                    <img
+                        src={`/images/rovers/${rover.name}.jpg`}
+                        className={classes.media}
+                        alt={rover.name}
+                    />
+                </CardMedia>
             </Link>
             <CardContent className={classes.content}>
                 <CardActions disableSpacing>

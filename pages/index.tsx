@@ -13,7 +13,7 @@ export default function Home() {
                 <title>Next App Example - NASA</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <Box style={{display: "flex"}}>
+            <Box style={{display: "flex", flexDirection: "column", alignItems: "strech"}}>
                 <Grid item xs={12}>
                     <Header />
                 </Grid>
@@ -27,7 +27,7 @@ export default function Home() {
                         Explore Mars by the eyes of a NASA rover
                     </Typography>
                 </Box>
-                <Grid item container xs={12}>
+                <Grid item container xs={12} justify={"center"}>
                     <Grid item xs={false} sm={false} md={false} lg={1} xl={2}/>
                     <Grid item xs={12} sm={12} md={12} lg={12} xl={6}>
                         <Content rovers={ROVERS}/>
