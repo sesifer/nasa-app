@@ -5,6 +5,7 @@ import { GalleryItem } from "../../types/types";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { usePaginatePhotos } from "../../../useRequest";
+import theme from "../../theme/theme";
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -37,6 +38,7 @@ interface GalleryProps {
 
 const GalleryHorizontal = (props: GalleryProps): JSX.Element => {
     const classes = useStyles();
+    const small = theme.breakpoints.down("sm");
 
     let url = `${DEFAULT_ENDPOINT}rovers/${props.roverId}/photos?api_key=${API_KEY}`;
     if (props.camera === "") {
@@ -69,7 +71,10 @@ const GalleryHorizontal = (props: GalleryProps): JSX.Element => {
 
     return (
         <div className={classes.root}>
-            <GridList cellHeight={"auto"} className={classes.gridList} cols={5}>
+            <GridList
+                cellHeight={"auto"}
+                className={classes.gridList}
+                cols={small ? 1 : 2}>
                 {isEmpty ? <Typography>Yay, no issues found.</Typography> : null}
                 {flattenPhotosArray.map((photo: GalleryItem) => {
                     return <GridListTile key={photo.id} cols={1}>

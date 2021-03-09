@@ -18,9 +18,15 @@ const useStyles = makeStyles((theme) =>
                 fontWeight: 400, fontSize: "10px",
             },
             [theme.breakpoints.down("md")]: {
-                fontWeight: 500, fontSize: "16px",
+                fontWeight: 500, fontSize: "12px",
             },
-        }
+            [theme.breakpoints.down("lg")]: {
+                fontSize: "16px",
+            },
+        },
+        header: {
+            width: "100vw",
+        },
     })
 );
 
@@ -30,7 +36,7 @@ const Header = () => {
     const toggleTheme = useContext(ThemeUpdateContext);
 
     return (
-        <AppBar position="static" color="secondary">
+        <AppBar position="static" color="secondary" className={classes.header}>
             <Toolbar>
                 <Typography variant={"subtitle2"} className={classes.typographyStyles}>
                     Meanwhile, on the Red planet..

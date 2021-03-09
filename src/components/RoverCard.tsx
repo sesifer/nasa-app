@@ -1,5 +1,14 @@
 import React from "react";
-import { Card, CardActions, CardContent, CardHeader, CardMedia, Collapse, IconButton } from "@material-ui/core";
+import {
+    Card,
+    CardActions,
+    CardContent,
+    CardHeader,
+    CardMedia,
+    Collapse,
+    IconButton, Toolbar,
+    Tooltip
+} from "@material-ui/core";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { Share } from "@material-ui/icons";
@@ -12,10 +21,11 @@ import clsx from "clsx";
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         card: {
-            maxWidth: 650,
+            maxWidth: 350,
             margin: "auto",
             transition: "0.3s",
             boxShadow: "0 8px 40px -12px rgba(0,0,0,0.3)",
+            backgroundColor: theme.palette.secondary.main,
             "&:hover": {
                 boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
             }
@@ -31,19 +41,21 @@ const useStyles = makeStyles((theme: Theme) =>
             maxWidth: "100vw",
         },
         content: {
-            padding: 20,
             display: "flex",
             flexDirection: "column",
             textAlign: "justify",
-        },
-        divider: {
-            margin: "20px 0"
+            padding: 0,
+            "&:last-child": {
+                paddingBottom: 5,
+            },
         },
         heading: {
-            fontWeight: "bold"
+            fontWeight: "bold",
+            color: theme.palette.background.default,
         },
         subheading: {
-            lineHeight: 1.8
+            lineHeight: 1.8,
+            color: theme.palette.background.default,
         },
         grid: {
             justifyContent: "space-between",alignItems: "flex-end",
@@ -54,9 +66,11 @@ const useStyles = makeStyles((theme: Theme) =>
             transition: theme.transitions.create("transform", {
                 duration: theme.transitions.duration.shortest,
             }),
+            padding: 5,
         },
         expandOpen: {
             transform: "rotate(180deg)",
+            padding: 5,
         },
     }),
 );
@@ -74,20 +88,8 @@ const RoverCard = ({ rover }: RoverCardProps): JSX.Element => {
     };
 
     return (
-        <Card className={classes.card} raised color={"primary"}>
-            <CardHeader
-                action={
-                    <>
-                        <IconButton aria-label="add to favorites">
-                            <FavoriteIcon />
-                        </IconButton>
-                        <IconButton aria-label="share">
-                            <Share />
-                        </IconButton>
-                    </>
-                }
-            />
-            {rover.name === "next"
+        <Card className={classes.card} raised>
+            {rover.name !== "next"
                 ? <Link href={`/rovers/${rover.id}`} as={`/rovers/${rover.name}`}>
                     <CardMedia className={classes.cardMedia}>
                         <img
@@ -98,7 +100,7 @@ const RoverCard = ({ rover }: RoverCardProps): JSX.Element => {
                     </CardMedia>
                 </Link>
                 :
-                <Link href={"http://www.mars-one.comddd/"}>
+                <Link href={"http://www.mars-one.com/"}>
                     <CardMedia className={classes.cardMedia}>
                         <img
                             src={`/images/rovers/${rover.name}.jpg`}
@@ -112,8 +114,7 @@ const RoverCard = ({ rover }: RoverCardProps): JSX.Element => {
                 <CardActions disableSpacing>
                     <Typography
                         className={classes.heading}
-                        variant={"h5"}
-                        gutterBottom
+                        variant={"h6"}
                     >
                         {rover.name.toUpperCase()}
                     </Typography>

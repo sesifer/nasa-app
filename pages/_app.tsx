@@ -6,7 +6,6 @@ import { SWRConfig } from "swr";
 import { ThemeProvider } from "./../src/theme/ThemeProvider";
 import styles from "./../styles/App.module.scss";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { Paper } from "@material-ui/core";
 
 function MyApp({ Component, pageProps } : AppProps) {
     const [style, setStyle] = useState<React.CSSProperties>({ visibility: "hidden" });

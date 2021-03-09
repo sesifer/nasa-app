@@ -1,4 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import {createMuiTheme, Theme, ThemeOptions} from "@material-ui/core/styles";
+import amber from "@material-ui/core/colors/amber";
+import grey from "@material-ui/core/colors/grey";
+import {grey700} from "material-ui/styles/colors";
 
 export const paletteColorsDark = {
     primary: "rgb(234, 103, 73)",
@@ -18,6 +23,7 @@ export const paletteColorsLight = {
 
 const options = (dark: boolean): ThemeOptions => {
     const paletteColors = dark ? paletteColorsDark : paletteColorsLight;
+
     return {
         palette: {
             type: dark ? "dark" : "light",
@@ -42,15 +48,39 @@ const options = (dark: boolean): ThemeOptions => {
             h1: {
                 fontFamily: "'Geostar', cursive",
                 fontWeight: 300,
-                fontSize: "96px",
-                lineHeight: "127px",
-                letterSpacing: "-1.5px",
+                letterSpacing: "0.5px",
+                "@media (max-width:600px)": {
+                    fontSize: "36px",
+                    lineHeight: "110%",
+                },
+                "@media (min-width:601px)": {
+                    fontSize: "48px",
+                    lineHeight: "120%",
+                },
+                "@media (min-width:900px)": {
+                    fontSize: "64px",
+                    lineHeight: "100%",
+                },
             },
-            h2: { fontFamily: "'Open Sans', sans-serif", fontWeight: 300, fontSize: "60px", lineHeight: "79px", letterSpacing: "-0.5px" },
+            h2: { fontFamily: "'Open Sans', sans-serif", fontWeight: 300, fontSize: "54x", lineHeight: "79px", letterSpacing: "-0.5px" },
             h3: { fontFamily: "'Open Sans', sans-serif", fontSize: "48px", lineHeight: "63px" },
             h4: { fontFamily: "'Open Sans', sans-serif", fontSize: "34px", lineHeight: "45px", letterSpacing: "0.25px" },
             h5: { fontFamily: "'Open Sans', sans-serif", fontSize: "24px", lineHeight: "32px" },
-            h6: { fontFamily: "'Open Sans', sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "26px", letterSpacing: "0.15px" },
+            h6: {
+                fontFamily: "'Open Sans', sans-serif", fontWeight: 500, fontSize: "20px", lineHeight: "26px", letterSpacing: "1.25px",
+                "@media (max-width:600px)": {
+                    fontSize: "14px",
+                    lineHeight: "110%",
+                },
+                "@media (min-width:601px)": {
+                    fontSize: "16px",
+                    lineHeight: "120%",
+                },
+                "@media (min-width:900px)": {
+                    fontSize: "16px",
+                    lineHeight: "120%",
+                },
+            },
             subtitle1: { fontFamily: "'Open Sans', sans-serif", fontSize: "16px", lineHeight: "19px", letterSpacing: "0.15px" },
             subtitle2: {
                 fontFamily: "'Open Sans', sans-serif",
@@ -59,7 +89,21 @@ const options = (dark: boolean): ThemeOptions => {
                 lineHeight: "16.41px",
                 letterSpacing: "0.1px",
             },
-            body1: { fontFamily: "'Open Sans', sans-serif", fontSize: "18px", lineHeight: "200%", letterSpacing: "0.5px" },
+            body1: {
+                fontFamily: "'Open Sans', sans-serif", fontSize: "18px", lineHeight: "200%", letterSpacing: "0.5px",
+                "@media (max-width:600px)": {
+                    fontSize: "12px",
+                    lineHeight: "110%",
+                },
+                "@media (min-width:601px)": {
+                    fontSize: "14px",
+                    lineHeight: "120%",
+                },
+                "@media (min-width:900px)": {
+                    fontSize: "16px",
+                    lineHeight: "120%",
+                },
+            },
             body2: { fontFamily: "'Open Sans', sans-serif", fontSize: "14px", lineHeight: "16px", letterSpacing: "0.25px" },
             button: { fontFamily: "'Open Sans', sans-serif", fontWeight: 500, fontSize: "14px", letterSpacing: "1.25px" },
             caption: { fontFamily: "'Open Sans', sans-serif", fontSize: "12px", lineHeight: "14px", letterSpacing: "0.4px" },
@@ -94,7 +138,71 @@ const options = (dark: boolean): ThemeOptions => {
                         backgroundColor: paletteColors.background,
                     }
                 }
-            }
+            },
+            MuiPaper: {
+                root: {
+                    backgroundColor: "white",
+                }
+            },
+            MuiPickersToolbar: {
+                toolbar: {
+                    backgroundColor: amber.A200,
+                },
+            },
+            MuiPickersCalendarHeader: {
+                switchHeader: {
+                    // backgroundColor: amber.A200,
+                    color: grey[300],
+                },
+                dayLabel: {
+                    color: grey[300],
+                },
+                iconButton: {
+                    backgroundColor: "white"
+                },
+            },
+            MuiPickersDay: {
+                day: {
+                    color: grey[700],
+                },
+                daySelected: {
+                    backgroundColor: amber[400],
+                },
+                dayDisabled: {
+                    color: grey[300],
+                },
+                current: {
+                    color: amber[900],
+                },
+            },
+            MuiPickersModal: {
+                dialogAction: {
+                    color: amber[400],
+                },
+            },
+            MuiIconButton: {
+                root: {
+                    color: grey[700],
+                }
+            },
+            MuiInputLabel: {
+                outlined: {
+                    color: paletteColors.primary,
+                },
+                shrink: {
+                    color: paletteColors.primary,
+                },
+            },
+            MuiOutlinedInput: {
+                inputAdornedStart: {
+                    color: paletteColors.text,
+                },
+            },
+            MuiMenu: {
+                list: {
+                    color: grey[700],
+                },
+            },
         }
     };
 };

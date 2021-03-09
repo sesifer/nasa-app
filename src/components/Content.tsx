@@ -9,9 +9,9 @@ type ContextProps = {
 
 const  Content = ({rovers}: ContextProps): JSX.Element => {
     return (
-        <Grid container item spacing={4}>
+        <Grid container item spacing={2} justify={"center"}>
             {rovers.map((rover) =>
-                <Grid key={`grid-${rover.name}`} item xs={12} sm={12} md={6} xl={4}>
+                <Grid key={`grid-${rover.name}`} item xs={12} sm={6} md={4} lg={2} xl={1}>
                     <RoverCard rover={rover} />
                 </Grid>
             )}

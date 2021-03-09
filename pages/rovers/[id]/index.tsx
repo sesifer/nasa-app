@@ -5,7 +5,7 @@ import { KeyboardDatePicker } from "@material-ui/pickers";
 import ManifestDetail from "../../../src/components/ManifestDetail";
 import { addDays, format } from "date-fns";
 import { PhotoItem } from "../../../src/types/types";
-import { Button, FormControl, InputLabel, MenuItem, Select, Typography } from "@material-ui/core";
+import { Button, FormControl, InputLabel, MenuItem, Paper, Select, Typography } from "@material-ui/core";
 import { API_KEY, DEFAULT_ENDPOINT } from "../../../src/types/constants";
 import GalleryHorizontal from "../../../src/components/Gallery/GalleryHorizontal";
 import Header from "../../../src/components/Header";
@@ -21,40 +21,46 @@ const useStyles = makeStyles((theme) =>
         },
         contentContainer: {
             width: "100%",
+
             [theme.breakpoints.down("xs")]: {
-                width: "95%",
+                // width: "95%",
             },
             [theme.breakpoints.down("sm")]: {
-                width: 450,
+                // width: "95%",
             },
             [theme.breakpoints.down("md")]: {
-                width: 430,
+                //width: "100%",
             },
             [theme.breakpoints.up("lg")]: {
-                width: "60%",
+                //width: "60%",
             },
             [theme.breakpoints.up("xl")]: {
-                width: 450,
+                //width: "65%",
             },
         },
+        title: {
+            padding: "0.5em",
+        },
         item: {
-            backgroundColor: "#ffffff",
+            backgroundColor: theme.palette.background.default,
             margin: "1em 0",
             padding: "1.5em",
-            width: "95%",
+            width: "100%",
             alignContent: "center",
             "&:hover": {
                 boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)",
+                borderColor: theme.palette.primary.main,
             },
             "& #camera-input-label": {
-                backgroundColor: "#ffffff",
+                backgroundColor: theme.palette.background.default,
                 paddingLeft: 4,
                 paddingRight: 4,
                 transform: "translate(35px, 15px) scale(0.75)",
             }
         },
         datePicker: {
-            width: "100%"
+            width: "100%",
+            borderColor: "theme.palette.primary.main !important",
         },
     })
 );
@@ -89,8 +95,6 @@ export default function Manifest(props: InferGetServerSidePropsType<typeof getSe
     const formattedYesterday = format(yesterday, "dd/MM/yyyy");
     const minDate = getMinDate(photos);
     const [selectedDate, setDate] = useState(minDate);
-    console.log("selectedDate:", selectedDate);
-
 
     //deal with cameras
     const cameras = getActualCameras(photos, minDate);
@@ -119,7 +123,9 @@ export default function Manifest(props: InferGetServerSidePropsType<typeof getSe
                             variant={"h1"}
                             align={"center"}
                             color={"primary"}
-                            gutterBottom={true}
+                            gutterBottom
+                            className={classes.title}
+
                         >
                             {name}
                         </Typography>
@@ -148,6 +154,7 @@ export default function Manifest(props: InferGetServerSidePropsType<typeof getSe
                                 minDateMessage={`Date should not be before ${minDate}`}
                                 className={classes.datePicker}
                             />
+
                         </div>
                         <FormControl variant="outlined" className={classes.item}>
                             <InputLabel id="camera-input-label" htmlFor="camera-select">
@@ -178,10 +185,10 @@ export default function Manifest(props: InferGetServerSidePropsType<typeof getSe
                                 roverId={id}
                             />
                         </div>
-                        <Button color="primary" variant="outlined" href="/">
-                        Back to All rovers
-                        </Button>
                     </div>
+                    <Button color="primary" variant="outlined" href="/">
+                            Back to All rovers
+                    </Button>
                 </div>
             </main>
         </>

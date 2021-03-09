@@ -38,12 +38,12 @@ const useStyles = makeStyles(theme =>
             justifyContent: "center",
         },
         table: {
-            width: "95%",
+            width: "100%",
             fontSize: 24,
             margin: "auto",
         },
         details: {
-            padding: "1.5em",
+            paddingBottom: "10px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -66,7 +66,6 @@ interface ManifestProps {
 const ManifestDetail = (props: ManifestProps) => {
     const { landingDate, launchDate, name, status, photosTaken } = props;
     const classes = useStyles();
-    console.log("theme:", theme);
 
     return (
         <Card className={classes.card} raised>
