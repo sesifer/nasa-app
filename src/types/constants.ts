@@ -63,5 +63,22 @@ export const CAMERAS = [
     {
         key: "MINITES",
         name: "Miniature Thermal Emission Spectrometer"
-    }
+    },
+    {
+        key: "ENTRY",
+        name: "Entry, Descent, and Landing Camera"
+    },
+    {key: "EDL_DDCAM", name: "Descent Stage Down-Look Camera"},
+    {key: "EDL_PUCAM2", name: "Parachute Up-Look Camera B"},
+    {key: "EDL_RDCAM", name: "Rover Down-Look Camera"},
+    {key: "EDL_RUCAM", name: "Rover Up-Look Camera"},
+    {key: "FRONT_HAZCAM_LEFT_A", name: "Front Hazard Avoidance Camera - Left"},
+    {key: "FRONT_HAZCAM_RIGHT_A", name: "Front Hazard Avoidance Camera - Right"},
+    {key: "MCZ_LEFT", name: "Mast Camera Zoom - Left"},
+    {key: "MCZ_RIGHT", name: "Mast Camera Zoom - Right"},
+    {key: "NAVCAM_LEFT", name: "Navigation Camera - Left"},
+    {key: "NAVCAM_RIGHT", name: "Navigation Camera - Right"},
+    {key: "REAR_HAZCAM_LEFT", name: "Rear Hazard Avoidance Camera - Left"},
+    {key: "REAR_HAZCAM_RIGHT", name: "Rear Hazard Avoidance Camera - Right"},
+    {key: "SKYCAM", name: "MEDA Skycam"},
 ];

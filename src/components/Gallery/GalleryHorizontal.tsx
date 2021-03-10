@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) =>
         button: {
             margin: "2em",
         },
-        yay: {
+        ops: {
             width: "100%",
         }
     })
@@ -93,8 +93,8 @@ const GalleryHorizontal = (props: GalleryProps): JSX.Element => {
                 cols={matchesXs ? 3 : (matchesSmLg ? 4 : 5)}
             >
                 {isEmpty
-                    ? <Typography variant={"body1"} className={classes.yay}>
-                            Yay, no photos found!
+                    ? <Typography variant={"body1"} className={classes.ops}>
+                            Ops, no photos found!
                     </Typography>
                     : null
                 }

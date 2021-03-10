@@ -15,7 +15,7 @@ import {
     useMediaQuery,
     useTheme
 } from "@material-ui/core";
-import { API_KEY, DEFAULT_ENDPOINT } from "../../../src/types/constants";
+import { API_KEY, CAMERAS, DEFAULT_ENDPOINT } from "../../../src/types/constants";
 import GalleryHorizontal from "../../../src/components/Gallery/GalleryHorizontal";
 import Header from "../../../src/components/Header";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
@@ -126,6 +126,14 @@ export default function Manifest(props: InferGetServerSidePropsType<typeof getSe
         setCamera(target.value as string);
     };
 
+    const getCameraName = (key: string): string => {
+        const found = CAMERAS.find(item => item.key === key);
+        const camera = found?.name || key;
+
+        return camera;
+    };
+
+    //deal with responsiveness
     const theme = useTheme();
     const matchesMdXl = useMediaQuery(theme.breakpoints.between("md", "xl"));
 
@@ -196,7 +204,7 @@ export default function Manifest(props: InferGetServerSidePropsType<typeof getSe
                                         {cameras.map(camera => {
                                             return (
                                                 <MenuItem key={`menu-item-${camera}`} value={camera}>
-                                                    {camera}
+                                                    {getCameraName(camera)}
                                                 </MenuItem>
                                             );
                                         })
