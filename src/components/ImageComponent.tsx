@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Dialog } from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() =>
+const useStyles = makeStyles((theme) =>
     createStyles({
         media: {
             width: "100%",
@@ -10,9 +10,9 @@ const useStyles = makeStyles(() =>
             maxWidth: "25vw",
         },
         mediaOpen: {
-            width: "100%",
             height: "auto",
-            maxWidth: "100vw",
+            width: "100%",
+            border: `solid 3px ${theme.palette.secondary.main}`
         },
     })
 );
