@@ -8,7 +8,6 @@ import Button from "@material-ui/core/Button";
 import { ThemeContext, ThemeUpdateContext } from "../theme/ThemeProvider";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
-
 const useStyles = makeStyles((theme) =>
     createStyles({
         typographyStyles: {

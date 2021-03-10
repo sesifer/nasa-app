@@ -3,7 +3,6 @@
 import {createMuiTheme, Theme, ThemeOptions} from "@material-ui/core/styles";
 import amber from "@material-ui/core/colors/amber";
 import grey from "@material-ui/core/colors/grey";
-import {grey700} from "material-ui/styles/colors";
 
 export const paletteColorsDark = {
     primary: "rgb(234, 103, 73)",
@@ -151,7 +150,6 @@ const options = (dark: boolean): ThemeOptions => {
             },
             MuiPickersCalendarHeader: {
                 switchHeader: {
-                    // backgroundColor: amber.A200,
                     color: grey[300],
                 },
                 dayLabel: {
@@ -202,6 +200,11 @@ const options = (dark: boolean): ThemeOptions => {
                 list: {
                     color: grey[700],
                 },
+            },
+            MuiPickersYear: {
+                root: {
+                    color: amber[900],
+                }
             },
         }
     };

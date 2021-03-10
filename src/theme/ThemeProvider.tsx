@@ -16,12 +16,14 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }: ThemeP
         const theme = localStorage.getItem("theme");
         if (theme && theme === "darkTheme") {
             setDarkTheme(true);
+        } else {
+            setDarkTheme(false);
         }
     }, []);
 
     function toggleTheme() {
         setDarkTheme(!isDarkTheme);
-        localStorage.setItem("theme", isDarkTheme ? "darkTheme" : "lightTheme");
+        localStorage.setItem("theme", isDarkTheme ? "lightTheme" : "darkTheme");
     }
 
     return (

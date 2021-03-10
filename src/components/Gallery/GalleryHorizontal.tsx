@@ -1,24 +1,32 @@
-import { Button, GridList, GridListTile, Typography } from "@material-ui/core";
-import { format } from "date-fns";
+import { Button, GridList, GridListTile, Typography, useMediaQuery, useTheme } from "@material-ui/core";
+import { format, isValid } from "date-fns";
 import { API_KEY, DEFAULT_ENDPOINT } from "../../types/constants";
 import { GalleryItem } from "../../types/types";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { usePaginatePhotos } from "../../../useRequest";
-import theme from "../../theme/theme";
+import ImageComponent from "../ImageComponent";
 
 const useStyles = makeStyles((theme) =>
     createStyles({
         root: {
             display: "flex",
+            flexDirection: "column",
             flexWrap: "wrap",
             justifyContent: "space-around",
+            alignItems: "center",
             overflow: "hidden",
             backgroundColor: theme.palette.background.paper,
+            padding: "1em",
         },
         gridList: {
-            // width: 500,
-            // height: 450,
+            width: "100%",
+            textAlign: "center",
+        },
+        media: {
+            width: "100%",
+            height: "auto",
+            maxWidth: "25vw",
         },
         galleryButtons: {
             display: "flex",
@@ -26,6 +34,9 @@ const useStyles = makeStyles((theme) =>
         },
         button: {
             margin: "2em",
+        },
+        yay: {
+            width: "100%",
         }
     })
 );
@@ -38,14 +49,19 @@ interface GalleryProps {
 
 const GalleryHorizontal = (props: GalleryProps): JSX.Element => {
     const classes = useStyles();
-    const small = theme.breakpoints.down("sm");
+    const theme = useTheme();
+    const matchesXs = useMediaQuery(theme.breakpoints.down("xs"));
+    const matchesSmLg = useMediaQuery(theme.breakpoints.between("sm", "md"));
 
     let url = `${DEFAULT_ENDPOINT}rovers/${props.roverId}/photos?api_key=${API_KEY}`;
     if (props.camera === "") {
         url = `${url}&sol=1&page=1`;
     } else {
-        const selectedDateStr = format(props.selectedDate, "yyyy-MM-dd");
-        url = `${url}&earth_date=${selectedDateStr}&camera=${props.camera}`;
+        const isDateValid = isValid(new Date(props.selectedDate));
+        if (isDateValid) {
+            const selectedDateStr = format(props.selectedDate, "yyyy-MM-dd");
+            url = `${url}&earth_date=${selectedDateStr}&camera=${props.camera}`;
+        }
     }
 
     const {
@@ -74,32 +90,40 @@ const GalleryHorizontal = (props: GalleryProps): JSX.Element => {
             <GridList
                 cellHeight={"auto"}
                 className={classes.gridList}
-                cols={small ? 1 : 2}>
-                {isEmpty ? <Typography>Yay, no issues found.</Typography> : null}
+                cols={matchesXs ? 3 : (matchesSmLg ? 4 : 5)}
+            >
+                {isEmpty
+                    ? <Typography variant={"body1"} className={classes.yay}>
+                            Yay, no photos found!
+                    </Typography>
+                    : null
+                }
                 {flattenPhotosArray.map((photo: GalleryItem) => {
-                    return <GridListTile key={photo.id} cols={1}>
-                        <img src={photo.img_src} alt="" />
-                    </GridListTile>;
+                    return (
+                        <GridListTile key={photo.id} cols={1}>
+                            <ImageComponent src={photo.img_src} />
+                        </GridListTile>
+                    );
                 })}
             </GridList>
             <div className={classes.galleryButtons}>
                 <Button
                     disabled={isLoadingMore || isReachingEnd}
                     onClick={() => setSize(size + 1)}
-                    color="secondary"
+                    color="primary"
                     variant="outlined"
                     className={classes.button}
                 >
                     {isLoadingMore
                         ? "Loading..."
                         : isReachingEnd
-                            ? "No more photos"
+                            ? "There's no more photos"
                             : "Load more"}
                 </Button>
                 <Button
                     disabled={!size}
                     onClick={() => setSize(0)}
-                    color="secondary"
+                    color="primary"
                     variant="outlined"
                     className={classes.button}
                 >

@@ -1,17 +1,6 @@
 import React from "react";
-import {
-    Card,
-    CardActions,
-    CardContent,
-    CardHeader,
-    CardMedia,
-    Collapse,
-    IconButton, Toolbar,
-    Tooltip
-} from "@material-ui/core";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import { Card, CardActions, CardContent, CardMedia, Collapse, IconButton } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import { Share } from "@material-ui/icons";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Link from "next/link";
 import { RoverBaseDetail } from "../types/types";

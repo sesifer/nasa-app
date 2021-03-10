@@ -7,7 +7,6 @@ import Table from "@material-ui/core/Table";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
-import theme from "../theme/theme";
 
 const useStyles = makeStyles(theme =>
     createStyles({
@@ -18,9 +17,6 @@ const useStyles = makeStyles(theme =>
             },
             [theme.breakpoints.down("sm")]: {
                 width: "100%",
-            },
-            [theme.breakpoints.up("lg")]: {
-                display: "flex",
             },
             margin: "auto",
             borderRadius: 0,

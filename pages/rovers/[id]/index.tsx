@@ -5,11 +5,21 @@ import { KeyboardDatePicker } from "@material-ui/pickers";
 import ManifestDetail from "../../../src/components/ManifestDetail";
 import { addDays, format } from "date-fns";
 import { PhotoItem } from "../../../src/types/types";
-import { Button, FormControl, InputLabel, MenuItem, Paper, Select, Typography } from "@material-ui/core";
+import {
+    Button,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
+    Typography,
+    useMediaQuery,
+    useTheme
+} from "@material-ui/core";
 import { API_KEY, DEFAULT_ENDPOINT } from "../../../src/types/constants";
 import GalleryHorizontal from "../../../src/components/Gallery/GalleryHorizontal";
 import Header from "../../../src/components/Header";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
+import Footer from "../../../src/components/Footer";
 
 const useStyles = makeStyles((theme) =>
     createStyles({
@@ -21,22 +31,27 @@ const useStyles = makeStyles((theme) =>
         },
         contentContainer: {
             width: "100%",
-
-            [theme.breakpoints.down("xs")]: {
-                // width: "95%",
-            },
             [theme.breakpoints.down("sm")]: {
-                // width: "95%",
+                width: "95%",
             },
             [theme.breakpoints.down("md")]: {
-                //width: "100%",
+                width: "80%",
             },
             [theme.breakpoints.up("lg")]: {
-                //width: "60%",
+                width: "70%",
             },
             [theme.breakpoints.up("xl")]: {
-                //width: "65%",
+                width: "70%",
             },
+        },
+        responsiveContainer: {
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+        },
+        leftSide: {
+            width: "33%",
         },
         title: {
             padding: "0.5em",
@@ -56,11 +71,17 @@ const useStyles = makeStyles((theme) =>
                 paddingLeft: 4,
                 paddingRight: 4,
                 transform: "translate(35px, 15px) scale(0.75)",
-            }
+            },
+        },
+        itemResp: {
+            margin: "0 0 0 2em",
         },
         datePicker: {
             width: "100%",
             borderColor: "theme.palette.primary.main !important",
+        },
+        backButton: {
+            marginTop: "1em",
         },
     })
 );
@@ -105,6 +126,9 @@ export default function Manifest(props: InferGetServerSidePropsType<typeof getSe
         setCamera(target.value as string);
     };
 
+    const theme = useTheme();
+    const matchesMdXl = useMediaQuery(theme.breakpoints.between("md", "xl"));
+
     return (
         <>
             <Head>
@@ -125,70 +149,76 @@ export default function Manifest(props: InferGetServerSidePropsType<typeof getSe
                             color={"primary"}
                             gutterBottom
                             className={classes.title}
-
                         >
                             {name}
                         </Typography>
-                        <ManifestDetail
-                            name={name}
-                            landingDate={landing_date}
-                            launchDate={launch_date}
-                            photosTaken={total_photos}
-                            status={status}
-                        />
-                        <div className={classes.item}>
-                            <KeyboardDatePicker
-                                autoOk
-                                variant="inline"
-                                inputVariant="outlined"
-                                id="date-picker"
-                                label="Pick your date:"
-                                format="dd/MM/yyyy"
-                                placeholder="DD/MM/YYYY"
-                                value={selectedDate}
-                                InputAdornmentProps={{ position: "start" }}
-                                onChange={(date) => date && setDate(date)}
-                                maxDate={yesterday}
-                                maxDateMessage={`Date should not be after ${formattedYesterday}`}
-                                minDate={minDate}
-                                minDateMessage={`Date should not be before ${minDate}`}
-                                className={classes.datePicker}
-                            />
+                        <div className={matchesMdXl ? classes.responsiveContainer : ""}>
+                            <div className={matchesMdXl ? classes.leftSide : ""}>
+                                <ManifestDetail
+                                    name={name}
+                                    landingDate={landing_date}
+                                    launchDate={launch_date}
+                                    photosTaken={total_photos}
+                                    status={status}
+                                />
+                                <div className={classes.item}>
+                                    <KeyboardDatePicker
+                                        autoOk
+                                        variant="inline"
+                                        inputVariant="outlined"
+                                        id="date-picker"
+                                        label="Pick your date:"
+                                        format="dd/MM/yyyy"
+                                        placeholder="DD/MM/YYYY"
+                                        value={selectedDate}
+                                        InputAdornmentProps={{ position: "start" }}
+                                        onChange={(date) => date && setDate(date)}
+                                        maxDate={yesterday}
+                                        maxDateMessage={`Date should not be after ${formattedYesterday}`}
+                                        minDate={minDate}
+                                        minDateMessage={`Date should not be before ${minDate}`}
+                                        className={classes.datePicker}
+                                    />
 
-                        </div>
-                        <FormControl variant="outlined" className={classes.item}>
-                            <InputLabel id="camera-input-label" htmlFor="camera-select">
+                                </div>
+                                <FormControl variant="outlined" className={classes.item}>
+                                    <InputLabel id="camera-input-label" htmlFor="camera-select">
                             Camera:
-                            </InputLabel>
-                            <Select
-                                inputProps={{
-                                    id: "camera-select"
-                                }}
-                                defaultValue={""}
-                                value={selectedCamera}
-                                onChange={handleChange}
-                            >
-                                {cameras.map(camera => {
-                                    return (
-                                        <MenuItem key={`menu-item-${camera}`} value={camera}>
-                                            {camera}
-                                        </MenuItem>
-                                    );
-                                })
-                                }
-                            </Select>
-                        </FormControl>
-                        <div className={classes.item}>
-                            <GalleryHorizontal
-                                camera={selectedCamera}
-                                selectedDate={selectedDate}
-                                roverId={id}
-                            />
+                                    </InputLabel>
+                                    <Select
+                                        inputProps={{
+                                            id: "camera-select"
+                                        }}
+                                        defaultValue={""}
+                                        value={selectedCamera}
+                                        onChange={handleChange}
+                                    >
+                                        {cameras.map(camera => {
+                                            return (
+                                                <MenuItem key={`menu-item-${camera}`} value={camera}>
+                                                    {camera}
+                                                </MenuItem>
+                                            );
+                                        })
+                                        }
+                                    </Select>
+                                </FormControl>
+                            </div>
+                            <div className={`${classes.item} ${matchesMdXl ? classes.itemResp : ""}`}>
+                                <GalleryHorizontal
+                                    camera={selectedCamera}
+                                    selectedDate={selectedDate}
+                                    roverId={id}
+                                />
+                            </div>
                         </div>
                     </div>
-                    <Button color="primary" variant="outlined" href="/">
+                    <Button color="secondary" variant="outlined" href="/"
+                        className={matchesMdXl ? classes.backButton: ""}
+                    >
                             Back to All rovers
                     </Button>
+                    <Footer />
                 </div>
             </main>
         </>

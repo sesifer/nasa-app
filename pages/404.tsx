@@ -1,11 +1,11 @@
-import Link from 'next/link';
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { CssBaseline, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import Link from "next/link";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { CssBaseline, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+    block404: {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -17,6 +17,9 @@ const useStyles = makeStyles((theme) => ({
         "& a": {
             textDecoration: "none",
         }
+    },
+    title: {
+        margin: "1em",
     },
 }));
 
@@ -31,9 +34,9 @@ const NotFound = () => {
     }, []);
 
     return (
-        <div className={classes.root}>
+        <div className={classes.block404}>
             <CssBaseline />
-            <Typography variant={"h1"}>Ooops...</Typography>
+            <Typography variant={"h1"} className={classes.title}>Ooops...</Typography>
             <Typography variant={"subtitle1"}>That page cannot be found :(</Typography>
             <Typography variant={"subtitle2"}>Going back to the
                 <Link href="/"><a> Homepage </a></Link> in 3 seconds...
